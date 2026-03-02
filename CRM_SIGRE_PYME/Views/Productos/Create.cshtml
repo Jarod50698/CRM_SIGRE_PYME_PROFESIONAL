@@ -1,0 +1,36 @@
+﻿@model CRM_SIGRE_PYME.Models.Producto
+
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<h2>Nuevo Producto</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">SKU</label>
+        <input asp-for="SKU" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio Compra</label>
+        <input asp-for="PrecioCompra" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Precio Venta</label>
+        <input asp-for="PrecioVenta" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

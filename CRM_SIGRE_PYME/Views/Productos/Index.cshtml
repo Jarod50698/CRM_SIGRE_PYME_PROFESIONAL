@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CRM_SIGRE_PYME.Models.Producto>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h2 class="mb-4">Productos</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">Nuevo Producto</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>SKU</th>
+            <th>Nombre</th>
+            <th>Precio Compra</th>
+            <th>Precio Venta</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SKU</td>
+                <td>@item.Nombre</td>
+                <td>@item.PrecioCompra</td>
+                <td>@item.PrecioVenta</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+            </tr>
+        }
+    </tbody>
+</table>

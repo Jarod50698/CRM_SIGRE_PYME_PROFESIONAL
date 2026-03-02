@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <h2 class="mb-4">Panel Administrativo - SIGRE PYME</h2>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Clientes</h5>
+                    <p>Gestión completa de clientes</p>
+                    <a asp-controller="Clientes" asp-action="Index" class="btn btn-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Productos</h5>
+                    <p>Inventario y precios</p>
+                    <a asp-controller="Productos" asp-action="Index" class="btn btn-success">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Pedidos</h5>
+                    <p>Ventas y estados</p>
+                    <a asp-controller="Pedidos" asp-action="Index" class="btn btn-warning">Ver</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
