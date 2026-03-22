@@ -14,13 +14,13 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<LogService> _userManager;
+        private readonly SignInManager<LogService> _signInManager;
         private readonly ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<LogService> userManager,
+            SignInManager<LogService> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

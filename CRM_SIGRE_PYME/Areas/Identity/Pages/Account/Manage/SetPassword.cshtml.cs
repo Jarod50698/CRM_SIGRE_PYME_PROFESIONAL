@@ -14,12 +14,12 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<LogService> _userManager;
+        private readonly SignInManager<LogService> _signInManager;
 
         public SetPasswordModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            UserManager<LogService> userManager,
+            SignInManager<LogService> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

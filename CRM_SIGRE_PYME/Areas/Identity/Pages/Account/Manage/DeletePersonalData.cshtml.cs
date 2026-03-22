@@ -15,13 +15,13 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<LogService> _userManager;
+        private readonly SignInManager<LogService> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
 
         public DeletePersonalDataModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<LogService> userManager,
+            SignInManager<LogService> signInManager,
             ILogger<DeletePersonalDataModel> logger)
         {
             _userManager = userManager;

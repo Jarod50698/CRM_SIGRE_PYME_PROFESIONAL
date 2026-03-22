@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using CRM_SIGRE_PYME.Data;
 using CRM_SIGRE_PYME.Models;
+using CRM_SIGRE_PYME.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region 🔐 BASE DE DATOS MYSQL
+#region BASE DE DATOS MYSQL
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -17,21 +18,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 #endregion
 
-#region 🔐 IDENTITY PROFESIONAL (ÚNICA CONFIGURACIÓN)
+#region IDENTITY
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    // 🔐 Reglas de contraseña
     options.Password.RequiredLength = 8;
     options.Password.RequireDigit = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
 
-    // 🔐 Email único obligatorio
     options.User.RequireUniqueEmail = true;
-
-    // 🔐 No requerir confirmación de cuenta
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -39,7 +36,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 
 #endregion
 
-#region 🔐 CONFIGURACIÓN DE COOKIE
+#region COOKIE
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -51,7 +48,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 #endregion
 
-#region 🔐 PROTEGER TODO EL SISTEMA POR DEFECTO
+#region AUTORIZACIÓN GLOBAL
 
 builder.Services.AddControllersWithViews(options =>
 {
@@ -62,7 +59,6 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AuthorizeFilter(policy));
 });
 
-// 🔓 Permitimos acceso libre al área Identity
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AllowAnonymousToAreaFolder("Identity", "/");
@@ -70,9 +66,16 @@ builder.Services.AddRazorPages(options =>
 
 #endregion
 
+#region SERVICIOS
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<LogService>();
+
+#endregion
+
 var app = builder.Build();
 
-#region 🔐 SEED DE ROLES Y ADMIN
+#region SEED ROLES Y ADMIN
 
 using (var scope = app.Services.CreateScope())
 {
@@ -115,7 +118,7 @@ using (var scope = app.Services.CreateScope())
 
 #endregion
 
-#region 🔐 MIDDLEWARES
+#region MIDDLEWARE
 
 if (!app.Environment.IsDevelopment())
 {
@@ -132,7 +135,7 @@ app.UseAuthorization();
 
 #endregion
 
-#region 🔐 RUTAS
+#region RUTAS
 
 app.MapControllerRoute(
     name: "default",

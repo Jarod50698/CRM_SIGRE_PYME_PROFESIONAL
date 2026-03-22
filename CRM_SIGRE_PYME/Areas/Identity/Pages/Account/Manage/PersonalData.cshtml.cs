@@ -12,11 +12,11 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<LogService> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<ApplicationUser> userManager,
+            UserManager<LogService> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;

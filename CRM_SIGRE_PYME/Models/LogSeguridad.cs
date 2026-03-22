@@ -1,25 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM_SIGRE_PYME.Models;
 
-public class LogSeguridad
+public class Pedido
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int LogId { get; set; }
+    public int PedidoId { get; set; }
 
-    public string? UsuarioId { get; set; }
+    // FK Cliente (obligatorio)
+    public int ClienteId { get; set; }
+    public Cliente Cliente { get; set; } = null!;
+
+    // FK Usuario (Identity usa string)
+    [Required]
+    public string UsuarioId { get; set; } = string.Empty;
+
+    public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
     [Required]
-    [MaxLength(100)]
-    public string Evento { get; set; } = string.Empty;
+    [MaxLength(30)]
+    public string Estado { get; set; } = "Pendiente";
 
-    public DateTime FechaEvento { get; set; } = DateTime.Now;
-
-    [MaxLength(250)]
-    public string? Detalle { get; set; }
-
-    [MaxLength(45)]
-    public string? IP { get; set; }
+    public decimal Total { get; set; }
 }

@@ -17,9 +17,9 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<LogService> _userManager;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager)
+        public ConfirmEmailModel(UserManager<LogService> userManager)
         {
             _userManager = userManager;
         }

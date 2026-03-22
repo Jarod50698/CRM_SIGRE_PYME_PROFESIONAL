@@ -12,5 +12,7 @@ namespace CRM_SIGRE_PYME.Models
         public bool Activo { get; set; } = true;
 
         public DateTime FechaRegistro { get; set; } = DateTime.Now;
+
+        public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
     }
 }

@@ -24,17 +24,17 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUserStore<ApplicationUser> _userStore;
-        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        private readonly SignInManager<LogService> _signInManager;
+        private readonly UserManager<LogService> _userManager;
+        private readonly IUserStore<LogService> _userStore;
+        private readonly IUserEmailStore<LogService> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<LogService> userManager,
+            IUserStore<LogService> userStore,
+            SignInManager<LogService> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -155,27 +155,27 @@ namespace CRM_SIGRE_PYME.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private ApplicationUser CreateUser()
+        private LogService CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                return Activator.CreateInstance<LogService>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(LogService)}'. " +
+                    $"Ensure that '{nameof(LogService)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<ApplicationUser> GetEmailStore()
+        private IUserEmailStore<LogService> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<ApplicationUser>)_userStore;
+            return (IUserEmailStore<LogService>)_userStore;
         }
     }
 }
